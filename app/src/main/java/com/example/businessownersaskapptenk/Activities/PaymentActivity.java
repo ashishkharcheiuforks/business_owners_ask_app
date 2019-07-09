@@ -48,7 +48,7 @@ public class PaymentActivity extends AppCompatActivity implements PaytmPaymentTr
 
         Intent intent = getIntent();
         restaurantId = intent.getStringExtra("restaurantId");
-        address = intent.getStringExtra("address");
+        address = intent.getStringExtra("hobby");
         orderDetails = intent.getStringExtra("orderDetails");
 
         sharedPref = getSharedPreferences("MY_KEY", Context.MODE_PRIVATE);

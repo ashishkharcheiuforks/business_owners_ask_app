@@ -55,9 +55,9 @@ public class OrderModel {
     @Expose
     private String status;
 
-    @SerializedName("address")
+    @SerializedName("hobby")
     @Expose
-    private String address;
+    private String hobby;
 
 
     public void setId(String id) {
@@ -132,12 +132,12 @@ public class OrderModel {
         this.status = status;
     }
 
-    public String getAddress() {
-        return address;
+    public String getHobby() {
+        return hobby;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setHobby(String hobby) {
+        this.hobby = hobby;
     }
 
     public ArrayList<OrderModel> getOrders() {
@@ -187,7 +187,7 @@ public class OrderModel {
                 ", orderDetails=" + orderDetails +
                 ", total=" + total +
                 ", status='" + status + '\'' +
-                ", address='" + address + '\'' +
+                ", hobby='" + hobby + '\'' +
                 '}';
     }
 }

@@ -33,9 +33,9 @@ public class Registration {
     @SerializedName("phone")
     @Expose
     private String phone;
-    @SerializedName("address")
+    @SerializedName("hobby")
     @Expose
-    private String address;
+    private String hobby;
 
     public Integer getId() {
         return id;
@@ -61,12 +61,12 @@ public class Registration {
         this.phone = phone;
     }
 
-    public String getAddress() {
-        return address;
+    public String getHobby() {
+        return hobby;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setHobby(String hobby) {
+        this.hobby = hobby;
     }
     public ArrayList<Registration> getRegistrationArrayListModel() {
         return registrationArrayListModel;
@@ -81,7 +81,7 @@ public class Registration {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
-                ", address='" + address + '\'' +
+                ", hobby='" + hobby + '\'' +
                 '}';
     }
 }

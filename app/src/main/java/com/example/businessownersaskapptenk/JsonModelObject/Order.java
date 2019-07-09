@@ -22,16 +22,16 @@ public class Order {
     private Object driver;
     @SerializedName("order_details")
     @Expose
-    private List<OrderDetail> orderDetails = null;
+    private List<OrderDetail> orderDetails;
     @SerializedName("total")
     @Expose
     private Integer total;
     @SerializedName("status")
     @Expose
     private String status;
-    @SerializedName("address")
+    @SerializedName("hobby")
     @Expose
-    private String address;
+    private String hobby;
 
     public Integer getId() {
         return id;
@@ -89,12 +89,12 @@ public class Order {
         this.status = status;
     }
 
-    public String getAddress() {
-        return address;
+    public String getHobby() {
+        return hobby;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setHobby(String hobby) {
+        this.hobby = hobby;
     }
 
 
@@ -108,7 +108,7 @@ public class Order {
                 ", orderDetails=" + orderDetails +
                 ", total=" + total +
                 ", status='" + status + '\'' +
-                ", address='" + address + '\'' +
+                ", hobby='" + hobby + '\'' +
                 '}';
     }
 }

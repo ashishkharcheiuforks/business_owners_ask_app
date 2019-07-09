@@ -20,7 +20,7 @@ package com.example.businessownersaskapptenk.JsonModelObject;
 //    @SerializedName("phone")
 //    @Expose
 //    private String phone;
-//    @SerializedName("address")
+//    @SerializedName("hobby")
 //    @Expose
 //    private String address;
 //    @SerializedName("logo")
@@ -51,11 +51,11 @@ package com.example.businessownersaskapptenk.JsonModelObject;
 //        this.phone = phone;
 //    }
 //
-//    public String getAddress() {
+//    public String getHobby() {
 //        return address;
 //    }
 //
-//    public void setAddress(String address) {
+//    public void setHobby(String address) {
 //        this.address = address;
 //    }
 //

@@ -155,7 +155,7 @@ public class DeliveryFragment extends Fragment implements OnMapReadyCallback {
                             orderIsDelivered = latestOrderJSONObject.getString("status").equals("Delivered");
 
                             customerName.setText(latestOrderJSONObject.getJSONObject("customer").getString("name"));
-                            customerAddress.setText(latestOrderJSONObject.getString("address"));
+                            customerAddress.setText(latestOrderJSONObject.getString("hobby"));
                             Picasso.with(getActivity())
                                     .load(latestOrderJSONObject.getJSONObject("customer").getString("avatar"))
                                     .transform(new CircleTransform())
@@ -481,8 +481,8 @@ public class DeliveryFragment extends Fragment implements OnMapReadyCallback {
 
         try {
 
-            String restaurantAddress = response.getJSONObject("order").getJSONObject("registration").getString("address");
-            String orderAddress = response.getJSONObject("order").getString("address");
+            String restaurantAddress = response.getJSONObject("order").getJSONObject("registration").getString("hobby");
+            String orderAddress = response.getJSONObject("order").getString("hobby");
 
             Geocoder coder = new Geocoder(getActivity());
             ArrayList<Address> resAddresses = (ArrayList<Address>) coder.getFromLocationName(restaurantAddress, 1);

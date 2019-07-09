@@ -18,9 +18,9 @@ public class Customer {
     @SerializedName("phone")
     @Expose
     private String phone;
-    @SerializedName("address")
+    @SerializedName("hobby")
     @Expose
-    private String address;
+    private String hobby;
 
     public Integer getId() {
         return id;
@@ -54,12 +54,12 @@ public class Customer {
         this.phone = phone;
     }
 
-    public String getAddress() {
-        return address;
+    public String getHobby() {
+        return hobby;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setHobby(String hobby) {
+        this.hobby = hobby;
     }
 
     @Override
@@ -69,7 +69,7 @@ public class Customer {
                 ", name='" + name + '\'' +
                 ", avatar='" + avatar + '\'' +
                 ", phone='" + phone + '\'' +
-                ", address='" + address + '\'' +
+                ", hobby='" + hobby + '\'' +
                 '}';
     }
 }

@@ -41,7 +41,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MealViewHolder
     public void onBindViewHolder(@NonNull MealAdapter.MealViewHolder mealViewHolder, final int position) {
 
         String mealNameText = mealModelList.get(position).getName();
-          String mealDescText = mealModelList.get(position).getShort_description();
+          String mealDescText = mealModelList.get(position).getRiko_description();
         String mealPriceText = String.valueOf(mealModelList.get(position).getPrice());
           String mealLogoImage = mealModelList.get(position).getImage();
 
@@ -53,7 +53,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MealViewHolder
                 intent.putExtra("restaurantId", restaurantId);
                 intent.putExtra("mealId", mealModelList.get(position).getId());
                 intent.putExtra("mealName", mealModelList.get(position).getName());
-                intent.putExtra("mealDescription", mealModelList.get(position).getShort_description());
+                intent.putExtra("mealDescription", mealModelList.get(position).getRiko_description());
                 intent.putExtra("mealPrice", mealModelList.get(position).getPrice());
                 intent.putExtra("mealImage", mealModelList.get(position).getImage());
                 activity.startActivity(intent);
@@ -134,7 +134,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MealViewHolder
 //        ImageView mealImage = (ImageView) view.findViewById(R.id.meal_image);
 //
 //        mealName.setText(mealModel.getName());
-//        mealDesc.setText(mealModel.getShort_description());
+//        mealDesc.setText(mealModel.getRiko_description());
 //        mealPrice.setText("$" + mealModel.getPrice());
 //        Picasso.with(activity.getApplicationContext()).load(mealModel.getImage()).fit().centerInside().into(mealImage);
 //
@@ -145,7 +145,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MealViewHolder
 //                intent.putExtra("restaurantId", restaurantId);
 //                intent.putExtra("mealId", mealModel.getId());
 //                intent.putExtra("mealName", mealModel.getName());
-//                intent.putExtra("mealDescription", mealModel.getShort_description());
+//                intent.putExtra("mealDescription", mealModel.getRiko_description());
 //                intent.putExtra("mealPrice", mealModel.getPrice());
 //                intent.putExtra("mealImage", mealModel.getImage());
 //                activity.startActivity(intent);

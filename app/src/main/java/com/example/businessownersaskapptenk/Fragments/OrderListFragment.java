@@ -86,14 +86,14 @@ public class OrderListFragment extends Fragment {
 
                 for (int i = 0; i < orderModelArrayList.size(); i++) {
                     Log.d(TAG, "onResponse: \n" +
-                            orderModelArrayList.get(i).getCustomer().getAddress() +
+                            orderModelArrayList.get(i).getCustomer().getHobby() +
                             orderModelArrayList.get(i).getRegistration().getName());
 
                     OrderModel orderModel = new OrderModel(
                             orderModelArrayList.get(i).getId(),
                             orderModelArrayList.get(i).getRegistration().getName(),
                             orderModelArrayList.get(i).getCustomer().getName(),
-                            orderModelArrayList.get(i).getAddress(),
+                            orderModelArrayList.get(i).getHobby(),
                             orderModelArrayList.get(i).getCustomer().getAvatar()
                     );
                     orderModelList.add(orderModel);
@@ -133,7 +133,7 @@ public class OrderListFragment extends Fragment {
 //                                        orderObject.getString("id"),
 //                                        orderObject.getJSONObject("registration").getString("name"),
 //                                        orderObject.getJSONObject("customer").getString("name"),
-//                                        orderObject.getString("address"),
+//                                        orderObject.getString("hobby"),
 //                                        orderObject.getJSONObject("customer").getString("avatar")
 //
 //                                );

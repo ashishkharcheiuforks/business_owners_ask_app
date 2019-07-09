@@ -56,7 +56,7 @@ package com.example.businessownersaskapptenk.Adapters;
 //        ImageView resLogo = (ImageView) view.findViewById(R.id.res_logo);
 //
 //        resName.setText(restaurant.getName());
-//        resAddress.setText(restaurant.getAddress());
+//        resAddress.setText(restaurant.getHobby());
 //        Picasso.with(activity.getApplicationContext()).load(restaurant.getLogo()).fit().into(resLogo);
 //
 //        view.setOnClickListener(new View.OnClickListener() {

@@ -418,8 +418,8 @@ public class OrderFragment extends Fragment implements OnMapReadyCallback {
         Example example = response.body();
         String status = "";
         try {
-            String restaurantAddress = example.getOrder().getRegistration().getAddress();
-            String orderAddress = example.getOrder().getAddress();
+            String restaurantAddress = example.getOrder().getRegistration().getHobby();
+            String orderAddress = example.getOrder().getHobby();
             Geocoder coder = new Geocoder(context);
             ArrayList<Address> resAddresses = (ArrayList<Address>) coder.getFromLocationName(restaurantAddress, 1);
             ArrayList<Address> ordAddresses = (ArrayList<Address>) coder.getFromLocationName(orderAddress, 1);

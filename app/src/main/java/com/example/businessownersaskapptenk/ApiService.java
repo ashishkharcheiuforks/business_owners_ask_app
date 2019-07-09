@@ -40,7 +40,7 @@ public interface ApiService {
     Call<ChecksumPaytm> getCustomerOrderAddPayment(  //StatusSuccessOrError
                                                      @Field("access_token") String accessToken,
                                                      @Field("registration_id") String registrationId,
-                                                     @Field("address") String address,
+                                                     @Field("hobby") String hobby,
                                                      @Field("order_details") String orderDetails);
 
 
@@ -51,7 +51,7 @@ public interface ApiService {
             @Field("ORDER_ID") String orderId,
             @Field("access_token") String accessToken,
             @Field("registration_id") String registrationId,
-            @Field("address") String address,
+            @Field("hobby") String hobby,
             @Field("order_details") String orderDetails
     );
 

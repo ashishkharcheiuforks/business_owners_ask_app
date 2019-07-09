@@ -6,7 +6,7 @@
     <color name="colorAccent">#6c5ce7</color>
     <color name="colorWings">#6c5ce7</color>
     <color name="colorLightGray">#aaaaaa</color>
-    <color name="colorTextGray">#ebebf1</color>
+    <color name="colorTextGray">#6c5ce7</color>
     <color name="colorSkipButton">#0984e3</color>
     <color name="colorPayTMButton">#00B9F5</color>
 </resources>

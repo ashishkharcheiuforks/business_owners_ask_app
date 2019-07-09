@@ -39,7 +39,7 @@ public class ResAdapter extends RecyclerView.Adapter<ResAdapter.MyViewHolder> {
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int position) {
         String resLogoImage1 = restaurantModelList.get(position).getLogo();
         final String resNameText1 = restaurantModelList.get(position).getName();
-        String resAddressText1 = restaurantModelList.get(position).getAddress();
+        String resAddressText1 = restaurantModelList.get(position).getHobby();
         final String resIdText1 = String.valueOf(restaurantModelList.get(position).getId());
 
         myViewHolder.setData(resNameText1, resAddressText1, resLogoImage1);

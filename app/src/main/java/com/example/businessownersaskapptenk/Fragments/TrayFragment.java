@@ -338,7 +338,7 @@ public class TrayFragment extends Fragment implements OnMapReadyCallback {
 
 
                     intent.putExtra("restaurantId", trayList.get(0).getRestaurantId());//");//trayList.get(0).getRestaurantId());
-                    intent.putExtra("address", address.getText().toString());
+                    intent.putExtra("hobby", address.getText().toString());
 
                     ArrayList<HashMap<String, Integer>> orderDetails = new ArrayList<HashMap<String, Integer>>();
                     for (Tray tray : trayList) {//trayList  changed to tList for checking

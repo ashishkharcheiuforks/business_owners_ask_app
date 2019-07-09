@@ -4,8 +4,8 @@
     <string name="fb_login_protocol_scheme">fb341678839888568</string>
 
     <string name="API_URL">http://46.101.192.46/api</string>
-    <string name="CLIENT_ID">573UAjjR69iYkXO07Hj17fRvIy3sJFjSZ8RUH21g</string>
-    <string name="CLIENT_SECRET">eaeveIpaUQvo9sBecHEmlzj7VA6ZF40Nw202zfsPYLdAEEi9JGI2yBV1C3Y2TjvMqlRdK8Kd2RxtgRAPT67g73wjYXtrJtw25XXw5cLRI2fNAzs5VdlVUBByPwqY19eg</string>
+    <string name="CLIENT_ID">l3rAis1Qbzo09KVPAHq4Bw9k7DoDCQ9HeUJzDTPO</string>
+    <string name="CLIENT_SECRET">huGP7zaRhmG7rohePH1xBFM4jbo82YSQMf9ymM1CpwDx2uO7WkGdfMPZDv4nRrogCQIt9d6elKMR93PNSgZ7PxUj2kZj8ZVve6o0NpHttolOshjmy6OgpsIFsTOFerno</string>
     <string name="title_activity_customer_main">CustomerMainActivity</string>
 
     <!-- TODO: Remove or change this placeholder text -->
