@@ -152,7 +152,7 @@ public class TrayFragment extends Fragment implements OnMapReadyCallback {
                 } else {
 
                     TextView alertText = new TextView(getActivity());
-                    alertText.setText("Your tray is empty. Please order a meal");
+                    alertText.setText("Your cart is empty.");
                     alertText.setTextSize(17);
                     alertText.setGravity(Gravity.CENTER);
                     alertText.setLayoutParams(
