@@ -2,12 +2,15 @@ package com.example.businessownersaskapptenk;
 
 import com.example.businessownersaskapptenk.JsonModelObject.Example;
 import com.example.businessownersaskapptenk.JsonModelObject.Registration;
+import com.example.businessownersaskapptenk.JsonModelObject.ResponseBasicLogin;
 import com.example.businessownersaskapptenk.JsonModelObject.ResponseBodyLogin;
 import com.example.businessownersaskapptenk.JsonModelObject.revenue.ExampleRevenue;
+import com.example.businessownersaskapptenk.JsonModelObject.revenue.ResponseAvatar;
 import com.example.businessownersaskapptenk.Objects.MealModel;
 import com.example.businessownersaskapptenk.Objects.OrderModel;
 import com.example.businessownersaskapptenk.Objects.TransactionStatus;
 
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -15,7 +18,9 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -127,6 +132,20 @@ public interface ApiService {
             @Field("INDUSTRY_TYPE_ID") String industryTypeId
     );
 
-//    PAYTM
+
+    ///////////Basic Login
+
+    @POST("rest-auth/registration/")
+    Call<ResponseBasicLogin> basicRegister(@Body RequestBody request);
+    @POST("rest-auth/login/")
+    Call<ResponseBasicLogin> basicLogin(@Body RequestBody request);
+    @POST("/rest-auth/password/reset/")
+    Call<ResponseBasicLogin> basicResetPassword(@Body RequestBody request);
+
+
+    ///////////image upload
+    @Multipart
+    @POST("/image/upload/")
+    Call<ResponseAvatar> uploadImage(@Part MultipartBody.Part file, @Part("token") RequestBody token);
 
 }

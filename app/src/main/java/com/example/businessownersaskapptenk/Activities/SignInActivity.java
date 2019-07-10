@@ -3,6 +3,7 @@ package com.example.businessownersaskapptenk.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -41,15 +42,48 @@ public class SignInActivity extends AppCompatActivity {
     private Button buttonLogin;
     private static final String TAG = "lgx_SignInActivity";
     private Button buttonSkip;
+    Button saved_login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_sign_in);
+        saved_login = findViewById(R.id.saved_login);
         buttonSkip = findViewById(R.id.buttonSkip);
         buttonLogin = findViewById(R.id.button_login);
         sharedPref = getSharedPreferences("MY_KEY", Context.MODE_PRIVATE);
+        String accessToken = sharedPref.getString("token", "");
+        if (accessToken == null || accessToken.equals(""))
+            saved_login.setVisibility(View.GONE);
+        else {
+            final String login_method = sharedPref.getString("login_method", "");
+            saved_login.setText("Continue as " + login_method + sharedPref.getString("name", sharedPref.getString("name", "Unkonwn")));
+            saved_login.setVisibility(View.VISIBLE);
+            saved_login.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    BUTTON_SKIPPED = false;
+                    //saved_login.setText("LOADING...");
+                    view.setClickable(false);
+                    String user_type;
+                    user_type = "customer";
+                    if (login_method.equals("basic")) {
+                        if (user_type.equals("customer")) {
+                            Intent intent = new Intent(getApplicationContext(), CustomerMainActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Intent intent = new Intent(getApplicationContext(), DriverMainActivity.class);
+                            startActivity(intent);
+                        }
+                    } else if (login_method.equals("facebook")) {
+                        if (AccessToken.getCurrentAccessToken() != null)
+                            loginToServer(AccessToken.getCurrentAccessToken().getToken(), user_type);
+                    }
+                }
+            });
+            // buttonLogin.setText("Continue as " + sharedPref.getString("email", ""));
+        }
+//////////////////////////////////////////////////////////////////////
         buttonSkip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,7 +91,6 @@ public class SignInActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), CustomerMainActivity.class);
                 startActivity(intent);
                 finish();
-
             }
         });
         buttonLogin.setOnClickListener(new View.OnClickListener() {
@@ -72,6 +105,16 @@ public class SignInActivity extends AppCompatActivity {
                     loginToServer(AccessToken.getCurrentAccessToken().getToken(), "customer");
                     Log.d(TAG, "onClick: " + AccessToken.getCurrentAccessToken().getToken());
                 }
+            }
+        });
+        Button basic_login_button = findViewById(R.id.basic_log_in);
+        basic_login_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BUTTON_SKIPPED = false;
+                Intent intent = new Intent(getApplicationContext(), BasicLoginActivity.class);
+                intent.putExtra("user_type", "customer");
+                startActivity(intent);
             }
         });
         callbackManager = CallbackManager.Factory.create();
@@ -92,7 +135,7 @@ public class SignInActivity extends AppCompatActivity {
                                             JSONObject object,
                                             GraphResponse response) {
                                         // Application code
-                                        Log.d("FACEBOOK DETAILS", object.toString());
+                                        Log.d(TAG, object.toString());
                                         SharedPreferences.Editor editor = sharedPref.edit();
                                         try {
                                             editor.putString("name", object.getString("name"));
@@ -157,7 +200,7 @@ public class SignInActivity extends AppCompatActivity {
             jsonObject.put("backend", "facebook");
             jsonObject.put("token", facebookAccessToken);
             jsonObject.put("user_type", userType);
-            Log.d("Token Object", jsonObject.toString());
+            Log.d(TAG, jsonObject.toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -172,6 +215,7 @@ public class SignInActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPref.edit();
                 try {
                     editor.putString("token", responseBodyLogin.getAccessToken());
+                    editor.putString("login_method", "facebook");
                     Log.d(TAG, "onResponse: accesstoken from response body login " + responseBodyLogin.getAccessToken());
                 } catch (Exception e) {
                     e.printStackTrace();

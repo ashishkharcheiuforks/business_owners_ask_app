@@ -9,4 +9,8 @@
     <color name="colorTextGray">#ebebf1</color>
     <color name="colorSkipButton">#0984e3</color>
     <color name="colorPayTMButton">#00B9F5</color>
+    <color name="colorLoginEmailButton">#00b894</color>
+    <color name="colorLoginEmailSharedPrefGone">#00cec9</color>
+    <color name="colorRed">#F70529</color>
+
 </resources>
