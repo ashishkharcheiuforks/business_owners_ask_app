@@ -1,14 +1,24 @@
 package com.example.businessownersaskapptenk.Activities;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -19,6 +29,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.ValueCallback;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,12 +39,20 @@ import com.example.businessownersaskapptenk.ApiServiceBuilder;
 import com.example.businessownersaskapptenk.Fragments.OrderFragment;
 import com.example.businessownersaskapptenk.Fragments.RestaurantListFragment;
 import com.example.businessownersaskapptenk.Fragments.TrayFragment;
+import com.example.businessownersaskapptenk.JsonModelObject.revenue.ResponseAvatar;
 import com.example.businessownersaskapptenk.R;
 import com.example.businessownersaskapptenk.Utils.CircleTransform;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -50,6 +69,12 @@ public class CustomerMainActivity extends AppCompatActivity implements Navigatio
     private static final String TAG = "lgx_CustomerMainActivity";
     private ImageView customer_avatar;
     private TextView customer_name;
+    public static final int REQUEST_SELECT_FILE = 100;
+    public ValueCallback<Uri[]> uploadMessage;
+    private final static int FCR = 1;
+    private String mCM;
+    private ValueCallback<Uri> mUM;
+    private boolean multiple_files = false;
 
     @SuppressLint("LongLogTag")
     @Override
@@ -195,11 +220,30 @@ public class CustomerMainActivity extends AppCompatActivity implements Navigatio
             Log.d(TAG, "BUTTON SKIPPED");
             customer_name.setText("Guest");
             customer_avatar.setBackgroundResource(R.drawable.running);
+            //ImageView display_image_view=findViewById(R.id.customer_avatar);
+            customer_avatar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(CustomerMainActivity.this, "You need to login to change your profile picture.", Toast.LENGTH_SHORT).show();
+                }
+            });
         } else {
             BUTTON_SKIPPED = false;
             Log.d(TAG, "BUTTON NOT SKIPPED");
             customer_name.setText(sharedPref.getString("name", "You are Logged in"));
             Picasso.with(this).load(sharedPref.getString("avatar", "https://imgur.com/a/IhETAND")).transform(new CircleTransform()).into(customer_avatar);
+            //ImageView display_image_view=findViewById(R.id.customer_avatar);
+            customer_avatar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (!sharedPref.getString("login_method", "").equals("basic")) {
+                        Toast.makeText(CustomerMainActivity.this, "You can not change your dp", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    Toast.makeText(CustomerMainActivity.this, "on dp clicked ", Toast.LENGTH_SHORT).show();
+                    showImagePicker();
+                }
+            });
         }
     }
 
@@ -269,5 +313,120 @@ public class CustomerMainActivity extends AppCompatActivity implements Navigatio
         });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+
+    private void showImagePicker() {
+        if (file_permission()) {
+            String[] perms = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
+            //checking for storage permission to write images for upload
+            if (ContextCompat.checkSelfPermission(CustomerMainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(CustomerMainActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(CustomerMainActivity.this, perms, FCR);
+                //checking for WRITE_EXTERNAL_STORAGE permission
+            } else if (ContextCompat.checkSelfPermission(CustomerMainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(CustomerMainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, FCR);
+                //checking for CAMERA permissions
+            } else if (ContextCompat.checkSelfPermission(CustomerMainActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(CustomerMainActivity.this, new String[]{Manifest.permission.CAMERA}, FCR);
+            }
+            Intent pickPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            pickPhoto.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            Intent[] intentArray;
+            intentArray = new Intent[]{pickPhoto};
+            Intent contentSelectionIntent = new Intent(Intent.ACTION_GET_CONTENT);
+            contentSelectionIntent.addCategory(Intent.CATEGORY_OPENABLE);
+            contentSelectionIntent.setType("*/*");
+            Intent chooserIntent = new Intent(Intent.ACTION_CHOOSER);
+            chooserIntent.putExtra(Intent.EXTRA_INTENT, contentSelectionIntent);
+            chooserIntent.putExtra(Intent.EXTRA_TITLE, "Choose an action");
+            chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, intentArray);
+            startActivityForResult(chooserIntent, FCR);
+        }
+    }
+
+    public boolean file_permission() {
+        if (Build.VERSION.SDK_INT >= 23 && (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)) {
+            ActivityCompat.requestPermissions(CustomerMainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE}, FCR);
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //creating new image file here
+    private File createImageFile() throws IOException {
+        @SuppressLint("SimpleDateFormat") String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "img_" + timeStamp + "_";
+        File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        return File.createTempFile(imageFileName, ".jpg", storageDir);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (Build.VERSION.SDK_INT >= 21) {
+            Uri results = null;
+            //checking if response is positive
+            if (resultCode == Activity.RESULT_OK) {
+                if (requestCode == FCR) {
+                    results = data.getData();
+                    handleSelectedImage(results);
+                }
+            }
+            //////////////
+        }
+    }
+
+    private void handleSelectedImage(Uri imageUri) {
+        //////////////load the images on imageview
+        View header = navigationView.getHeaderView(0);
+        ImageView customer_avatar = header.findViewById(R.id.customer_avatar);
+        Toast.makeText(CustomerMainActivity.this, "image select " + getPath(imageUri), Toast.LENGTH_SHORT).show();
+        File image = new File(getPath(imageUri));
+        Picasso.with(CustomerMainActivity.this).load(image).transform(new CircleTransform()).into(customer_avatar);
+        uploadToServer(image);
+    }
+
+    public String getPath(Uri uri) {
+        String[] projection = {MediaStore.Images.Media.DATA};
+        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
+        if (cursor == null) return null;
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String s = cursor.getString(column_index);
+        cursor.close();
+        return s;
+    }
+
+    private void uploadToServer(File file) {
+        // Create a request body with file and image media type
+        RequestBody fileReqBody = RequestBody.create(MediaType.parse("image/*"), file);
+        // Create MultipartBody.Part using file request-body,file name and part name
+        MultipartBody.Part part = MultipartBody.Part.createFormData("image", file.getName(), fileReqBody);
+        String accessToken = sharedPref.getString("token", "");
+        RequestBody token = RequestBody.create(MediaType.parse("multipart/form-data"), accessToken);
+        ApiService service = ApiServiceBuilder.getService();
+        Call<ResponseAvatar> call = service.uploadImage(part, token);
+        call.enqueue(new Callback<ResponseAvatar>() {
+            @Override
+            public void onResponse(Call<ResponseAvatar> call, Response<ResponseAvatar> response) {
+                if (response.body() == null)
+                    return;
+                if (response.isSuccessful()) {
+                    Toast.makeText(CustomerMainActivity.this, "on response" + response.message(), Toast.LENGTH_SHORT).show();
+                    ResponseAvatar responseAvatar = response.body();
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    try {
+                        editor.putString("avatar", responseAvatar.getAvatar());
+                        editor.commit();
+                    } catch (Exception e) {
+                    }
+                }
+                Log.d("PostSnapResponse", response.message());
+            }
+
+            @Override
+            public void onFailure(Call<ResponseAvatar> call, Throwable t) {
+                Log.d("PostSnapResponse", t.getMessage());
+            }
+        });
     }
 }

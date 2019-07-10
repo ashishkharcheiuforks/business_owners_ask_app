@@ -187,8 +187,8 @@ public class MealDetailActivity extends AppCompatActivity {
                 super.onPostExecute(result);
                 if (result.equals("DIFFERENT_RESTAURANT")) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(MealDetailActivity.this);
-                    builder.setTitle("Start New Tray?");
-                    builder.setMessage("You are ordering meal from another restaurant. Would you like to clean the current tray?");
+                    builder.setTitle("Start New Cart?");
+                    builder.setMessage("You are ordering from another department. Would you like to clean the current cart?");
                     builder.setPositiveButton("Cancel", null);
                     builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
@@ -204,7 +204,7 @@ public class MealDetailActivity extends AppCompatActivity {
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(MealDetailActivity.this);
                     builder.setTitle("Add More?");
-                    builder.setMessage("Your tray already has this meal. Do you want to add more?");
+                    builder.setMessage("Your cart already has this product. Do you want to add more?");
                     builder.setPositiveButton("No", null);
                     builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
