@@ -263,7 +263,7 @@ public class BasicLoginActivity extends AppCompatActivity {
 
         if(isEmpty(edit_password)){
             edit_password.setText(null);
-            edit_password.setHintTextColor(getResources().getColor(R.color.colorRed));
+            edit_password.setHintTextColor(getResources().getColor(R.color.red));
             edit_password.setHint("Password required");
             flag=false;
 
@@ -271,7 +271,7 @@ public class BasicLoginActivity extends AppCompatActivity {
 
         if(isEmpty(edit_email)){
             edit_email.setText(null);
-            edit_email.setHintTextColor(getResources().getColor(R.color.colorRed));
+            edit_email.setHintTextColor(getResources().getColor(R.color.red));
             edit_email.setHint("Email required");
             flag=false;
         }

@@ -204,7 +204,7 @@ public class BasicRegisterActivity extends AppCompatActivity {
         if(isEmpty(first_name_edit)){
 
             first_name_edit.setText(null);
-            first_name_edit.setHintTextColor(getResources().getColor(R.color.colorRed));
+            first_name_edit.setHintTextColor(getResources().getColor(R.color.red));
             first_name_edit.setHint("First Name required");
             flag=false;
         }
@@ -212,7 +212,7 @@ public class BasicRegisterActivity extends AppCompatActivity {
         if(isEmpty(last_name_edit)){
 
             last_name_edit.setText(null);
-            last_name_edit.setHintTextColor(getResources().getColor(R.color.colorRed));
+            last_name_edit.setHintTextColor(getResources().getColor(R.color.red));
             last_name_edit.setHint("Last Name required");
             flag=false;
 
@@ -221,21 +221,21 @@ public class BasicRegisterActivity extends AppCompatActivity {
         if(isEmpty(username_edit)){
 
             username_edit.setText(null);
-            username_edit.setHintTextColor(getResources().getColor(R.color.colorRed));
+            username_edit.setHintTextColor(getResources().getColor(R.color.red));
             username_edit.setHint("Username required");
             flag=false;
 
         }
         if(isEmpty(password1_edit)){
             password1_edit.setText(null);
-            password1_edit.setHintTextColor(getResources().getColor(R.color.colorRed));
+            password1_edit.setHintTextColor(getResources().getColor(R.color.red));
             password1_edit.setHint("Password required");
             flag=false;
 
         }
         if(isEmpty(password2_edit)){
             password2_edit.setText(null);
-            password2_edit.setHintTextColor(getResources().getColor(R.color.colorRed));
+            password2_edit.setHintTextColor(getResources().getColor(R.color.red));
             password2_edit.setHint("Password required");
             flag=false;
 
@@ -243,7 +243,7 @@ public class BasicRegisterActivity extends AppCompatActivity {
 
         if(isEmpty(email_edit)){
             email_edit.setText(null);
-            email_edit.setHintTextColor(getResources().getColor(R.color.colorRed));
+            email_edit.setHintTextColor(getResources().getColor(R.color.red));
             email_edit.setHint("Email required");
             flag=false;
 
