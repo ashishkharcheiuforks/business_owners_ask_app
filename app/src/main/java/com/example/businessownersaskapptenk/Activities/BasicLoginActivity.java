@@ -51,6 +51,7 @@ public class BasicLoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), BasicRegisterActivity.class);
                 intent.putExtra("user_type",user_type);
                 startActivity(intent);
+                finish();
             }
         });
 
