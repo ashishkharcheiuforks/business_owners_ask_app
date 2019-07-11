@@ -21,8 +21,52 @@ public class Tray {
     @ColumnInfo(name = "meal_quantity")
     private int mealQuantity;
 
+    @ColumnInfo(name = "drink_id")
+    private String drinkId;
+
+    @ColumnInfo(name = "drink_name")
+    private String drinkName;
+
+    @ColumnInfo(name = "drink_price")
+    private float drinkPrice;
+
+    @ColumnInfo(name = "drink_quantity")
+    private int drinkQuantity;
+
     @ColumnInfo(name = "registration_id")
     private String restaurantId;
+
+    public String getDrinkId() {
+        return drinkId;
+    }
+
+    public void setDrinkId(String drinkId) {
+        this.drinkId = drinkId;
+    }
+
+    public String getDrinkName() {
+        return drinkName;
+    }
+
+    public void setDrinkName(String drinkName) {
+        this.drinkName = drinkName;
+    }
+
+    public float getDrinkPrice() {
+        return drinkPrice;
+    }
+
+    public void setDrinkPrice(float drinkPrice) {
+        this.drinkPrice = drinkPrice;
+    }
+
+    public int getDrinkQuantity() {
+        return drinkQuantity;
+    }
+
+    public void setDrinkQuantity(int drinkQuantity) {
+        this.drinkQuantity = drinkQuantity;
+    }
 
     public int getId() {
         return id;
@@ -80,6 +124,10 @@ public class Tray {
                 ", mealName='" + mealName + '\'' +
                 ", mealPrice=" + mealPrice +
                 ", mealQuantity=" + mealQuantity +
+                ", drinkId='" + drinkId + '\'' +
+                ", drinkName='" + drinkName + '\'' +
+                ", drinkPrice=" + drinkPrice +
+                ", drinkQuantity=" + drinkQuantity +
                 ", restaurantId='" + restaurantId + '\'' +
                 '}';
     }

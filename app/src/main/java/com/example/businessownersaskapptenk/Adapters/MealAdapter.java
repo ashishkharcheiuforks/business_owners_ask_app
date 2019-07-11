@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.businessownersaskapptenk.Activities.MealDetailActivity;
-import com.example.businessownersaskapptenk.Objects.MealModel;
+import com.example.businessownersaskapptenk.JsonModelObject.Meal;
 import com.example.businessownersaskapptenk.R;
 import com.squareup.picasso.Picasso;
 
@@ -19,11 +19,11 @@ import java.util.List;
 
 public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MealViewHolder> {
 
-    private List<MealModel> mealModelList;
+    private List<Meal> mealModelList;
     private Activity activity;
     private String restaurantId;
 
-    public MealAdapter(List<MealModel> mealModelList, Activity activity, String restaurantId) {
+    public MealAdapter(List<Meal> mealModelList, Activity activity, String restaurantId) {
         this.mealModelList = mealModelList;
         this.activity = activity;
         this.restaurantId = restaurantId;
@@ -41,7 +41,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MealViewHolder
     public void onBindViewHolder(@NonNull MealAdapter.MealViewHolder mealViewHolder, final int position) {
 
         String mealNameText = mealModelList.get(position).getName();
-          String mealDescText = mealModelList.get(position).getShort_description();
+          String mealDescText = mealModelList.get(position).getShortDescription();
         String mealPriceText = String.valueOf(mealModelList.get(position).getPrice());
           String mealLogoImage = mealModelList.get(position).getImage();
 
@@ -53,7 +53,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MealViewHolder
                 intent.putExtra("restaurantId", restaurantId);
                 intent.putExtra("mealId", mealModelList.get(position).getId());
                 intent.putExtra("mealName", mealModelList.get(position).getName());
-                intent.putExtra("mealDescription", mealModelList.get(position).getShort_description());
+                intent.putExtra("mealDescription", mealModelList.get(position).getShortDescription());
                 intent.putExtra("mealPrice", mealModelList.get(position).getPrice());
                 intent.putExtra("mealImage", mealModelList.get(position).getImage());
                 activity.startActivity(intent);

@@ -345,6 +345,7 @@ public class TrayFragment extends Fragment implements OnMapReadyCallback {
 
                         HashMap<String, Integer> map = new HashMap<>();
                         map.put("meal_id", Integer.parseInt(tray.getMealId()));
+//                        map.put("drink_id", Integer.parseInt(tray.getDrinkId()));
                         map.put("quantity", tray.getMealQuantity());
                         orderDetails.add(map);
 

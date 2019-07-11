@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.example.businessownersaskapptenk.Adapters.MealAdapter;
 import com.example.businessownersaskapptenk.ApiService;
 import com.example.businessownersaskapptenk.ApiServiceBuilder;
-import com.example.businessownersaskapptenk.Objects.MealModel;
+import com.example.businessownersaskapptenk.JsonModelObject.Meal;
 import com.example.businessownersaskapptenk.R;
 
 import java.util.ArrayList;
@@ -25,10 +25,10 @@ import retrofit2.Response;
 
 public class MealListActivity extends AppCompatActivity {
 
-    private ArrayList<MealModel> mealArrayList;
+    private ArrayList<Meal> mealArrayList;
     private RecyclerView recyclerView;
     private MealAdapter mealAdapter;
-    private MealModel[] listArr = new MealModel[]{};
+    private Meal[] listArr = new Meal[]{};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,25 +66,25 @@ public class MealListActivity extends AppCompatActivity {
         //This is an instance of our ApiService, and we are gonna pass our API service class,
         ApiService apiService = ApiServiceBuilder.getService();
         // Next we are Calling our method on this API
-        Call<MealModel> mealCall = apiService.getMeals(Integer.parseInt(restaurantId));
+        Call<Meal> mealCall = apiService.getMeals(Integer.parseInt(restaurantId));
         // Now we choose if we are going to call it synchronously or asynchronously
         // Since we are in an activity and an UI thread we need to do an Async with the method enqueue
-        mealCall.enqueue(new Callback<MealModel>() {
+        mealCall.enqueue(new Callback<Meal>() {
             @Override
-            public void onResponse(Call<MealModel> call, Response<MealModel> response) {
+            public void onResponse(Call<Meal> call, Response<Meal> response) {
                 //What happens when we get a reponse from our server
                 for (int i = 0; i < response.body().getMealList().size(); i++) {
 
                     mealArrayList.add(response.body().getMealList().get(i));
                 }
 
-                listArr = new MealModel[mealArrayList.size()];
+                listArr = new Meal[mealArrayList.size()];
                 listArr = mealArrayList.toArray(listArr);
                 mealAdapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onFailure(Call<MealModel> call, Throwable t) {
+            public void onFailure(Call<Meal> call, Throwable t) {
                 // This throws all the http error codes, network failures, null exceptions
                 Toast.makeText(getApplicationContext(), t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
             }
@@ -110,7 +110,7 @@ public class MealListActivity extends AppCompatActivity {
 
                 mealArrayList.clear();
 
-                for (MealModel m : listArr) {
+                for (Meal m : listArr) {
                     if (m.getName().toLowerCase().contains(charSequence.toString().toLowerCase())) {
 
                         mealArrayList.add(m);
