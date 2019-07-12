@@ -499,8 +499,11 @@ public class OrderFragment extends Fragment implements OnMapReadyCallback {
                         try {
                             OrderDetail orderDetail = orderDetailJsonModelObjectList.get(i);
                             trayModel.setMealName(orderDetail.getMeal().getName());
+                            trayModel.setDrinkName(orderDetail.getDrink().getName());
                             trayModel.setMealPrice(orderDetail.getMeal().getPrice());
+                            trayModel.setDrinkPrice(orderDetail.getDrink().getPrice());
                             trayModel.setMealQuantity(orderDetail.getQuantity());
+                            trayModel.setDrinkQuantity(orderDetail.getQuantity());
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

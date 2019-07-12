@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.businessownersaskapptenk.Activities.DrinkListActivity;
-import com.example.businessownersaskapptenk.Activities.MealListActivity;
 import com.example.businessownersaskapptenk.JsonModelObject.Registration;
 import com.example.businessownersaskapptenk.R;
 import com.squareup.picasso.Picasso;

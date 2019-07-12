@@ -73,4 +73,16 @@ public class Meal {
     public void setPrice(Float price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "Meal{" +
+                "mealList=" + mealList +
+                ", id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", shortDescription='" + shortDescription + '\'' +
+                ", image='" + image + '\'' +
+                ", price=" + price +
+                '}';
+    }
 }
