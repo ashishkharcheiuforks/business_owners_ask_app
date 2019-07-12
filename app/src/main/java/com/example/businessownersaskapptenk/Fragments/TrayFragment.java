@@ -54,7 +54,7 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class TrayFragment extends Fragment implements OnMapReadyCallback {
-
+    private static final String TAG = "lgx_TrayFragment";
     private AppDatabase db;
     private ArrayList<Tray> trayList;
     private TrayAdapter trayAdapter;
@@ -345,6 +345,7 @@ public class TrayFragment extends Fragment implements OnMapReadyCallback {
 
                         HashMap<String, Integer> map = new HashMap<>();
                         map.put("meal_id", Integer.parseInt(tray.getMealId()));
+                        Log.d(TAG, "onClick: MealId --> " + Integer.parseInt(tray.getMealId()));
                         map.put("quantity", tray.getMealQuantity());
                         orderDetails.add(map);
 
