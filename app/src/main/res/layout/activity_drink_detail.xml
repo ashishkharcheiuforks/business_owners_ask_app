@@ -95,12 +95,12 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/button_add_tray"
+            android:id="@+id/button_add_drink_tray"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:background="@color/colorWings"
-            android:text="ADD TO CART"
+            android:text="ADD DRINK TO TRAY"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
     </LinearLayout>

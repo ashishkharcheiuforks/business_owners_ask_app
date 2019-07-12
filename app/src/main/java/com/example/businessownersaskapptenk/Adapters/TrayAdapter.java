@@ -15,7 +15,6 @@ import com.example.businessownersaskapptenk.R;
 import java.util.List;
 
 public class TrayAdapter extends RecyclerView.Adapter<TrayAdapter.TrayViewHolder> {
-
     private List<Tray> trayModelList;
     private Activity activity;
 
@@ -28,24 +27,34 @@ public class TrayAdapter extends RecyclerView.Adapter<TrayAdapter.TrayViewHolder
     @Override
     public TrayAdapter.TrayViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(activity).inflate(R.layout.list_item_tray, viewGroup, false);
-
         return new TrayViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull TrayAdapter.TrayViewHolder trayViewHolder, int position) {
-        String mealNameText = trayModelList.get(position).getMealName();
-        final String mealQuantityText = String.valueOf(trayModelList.get(position).getMealQuantity());
-        String mealSubtotalText = String.valueOf(trayModelList.get(position).getMealPrice() * trayModelList.get(position).getMealQuantity());
-
-        trayViewHolder.setData(mealNameText, mealQuantityText, mealSubtotalText);
-        trayViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(activity, " Clicked on: " + mealQuantityText, Toast.LENGTH_SHORT).show();
-            }
-        });
-
+        if (trayModelList.get(position).getMealName() != null) {
+            String mealplusdrinkNameText = trayModelList.get(position).getMealName();
+            final String mealplusdrinkQuantityText = String.valueOf(trayModelList.get(position).getMealQuantity());
+            String mealplusdrinkSubtotalText = String.valueOf((trayModelList.get(position).getMealPrice() * trayModelList.get(position).getMealQuantity()));
+            trayViewHolder.setData(mealplusdrinkNameText, mealplusdrinkQuantityText, mealplusdrinkSubtotalText);
+            trayViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(activity, " Clicked on: MEALL!LL!L!L!L " + mealplusdrinkQuantityText + " " + mealplusdrinkNameText + " " + mealplusdrinkSubtotalText, Toast.LENGTH_LONG).show();
+                }
+            });
+        } else {
+            String mealplusdrinkNameText = trayModelList.get(position).getDrinkName();
+            final String mealplusdrinkQuantityText = String.valueOf(trayModelList.get(position).getDrinkQuantity());
+            String mealplusdrinkSubtotalText = String.valueOf(((trayModelList.get(position).getDrinkPrice() * trayModelList.get(position).getDrinkQuantity())));
+            trayViewHolder.setData(mealplusdrinkNameText, mealplusdrinkQuantityText, mealplusdrinkSubtotalText);
+            trayViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(activity, " Clicked on: DRINKKKKKKKKK" + mealplusdrinkQuantityText + " " + mealplusdrinkNameText + " " + mealplusdrinkSubtotalText, Toast.LENGTH_LONG).show();
+                }
+            });
+        }
     }
 
     @Override
@@ -54,69 +63,21 @@ public class TrayAdapter extends RecyclerView.Adapter<TrayAdapter.TrayViewHolder
     }
 
     public class TrayViewHolder extends RecyclerView.ViewHolder {
-        private TextView mealName;
-        private TextView mealQuantity;
-        private TextView mealSubTotal;
+        private TextView mealplusdrinkName;
+        private TextView mealplusdrinkQuantity;
+        private TextView mealplusdrinkSubTotal;
 
         public TrayViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            mealName = (TextView) itemView.findViewById(R.id.tray_meal_name);
-
-            mealQuantity = (TextView) itemView.findViewById(R.id.tray_meal_quantity);
-
-            mealSubTotal = (TextView) itemView.findViewById(R.id.tray_meal_subtotal);
-
+            mealplusdrinkName = (TextView) itemView.findViewById(R.id.tray_meal_plus_drink_name);
+            mealplusdrinkQuantity = (TextView) itemView.findViewById(R.id.tray_meal_plus_drink_quantity);
+            mealplusdrinkSubTotal = (TextView) itemView.findViewById(R.id.tray_meal_plus_drink_subtotal);
         }
 
-        private void setData(String mealNameText, String mealQuantityText, String mealSubtotalText) {
-            mealName.setText(mealNameText);
-            mealQuantity.setText(mealQuantityText);
-            mealSubTotal.setText(mealSubtotalText);
-
+        private void setData(String mealplusdrinkNameText, String mealplusdrinkQuantityText, String mealplusdrinkSubtotalText) {
+            mealplusdrinkName.setText(mealplusdrinkNameText);
+            mealplusdrinkQuantity.setText(mealplusdrinkQuantityText);
+            mealplusdrinkSubTotal.setText(mealplusdrinkSubtotalText);
         }
     }
-
-
-//    private Activity activity;
-//    private ArrayList<Tray> trayList;
-//
-//    public TrayAdapter(Activity activity, ArrayList<Tray> trayList) {
-//        this.activity = activity;
-//        this.trayList = trayList;
-//    }
-//
-//    @Override
-//    public int getCount() {
-//        return trayList.size();
-//    }
-//
-//    @Override
-//    public Object getItem(int i) {
-//        return trayList.get(i);
-//    }
-//
-//    @Override
-//    public long getItemId(int i) {
-//        return i;
-//    }
-//
-//    @Override
-//    public View getView(int i, View view, ViewGroup viewGroup) {
-//
-//        if (view == null) {
-//            view = LayoutInflater.from(activity).inflate(R.layout.list_item_tray, null);
-//        }
-//
-//        TextView mealName = (TextView) view.findViewById(R.id.tray_meal_name);
-//        TextView mealQuantity = (TextView) view.findViewById(R.id.tray_meal_quantity);
-//        TextView mealSubTotal = (TextView) view.findViewById(R.id.tray_meal_subtotal);
-//
-//        Tray tray = trayList.get(i);
-//        mealName.setText(tray.getMealName());
-//        mealQuantity.setText(tray.getMealQuantity() + "");
-//        mealSubTotal.setText("$" + (tray.getMealPrice() * tray.getMealQuantity()));
-//
-//        return view;
-//    }
 }

@@ -20,8 +20,14 @@ public interface TrayDAO {
     void deleteAll();
 
     @Query("SELECT * FROM tray WHERE meal_id = :mealId")
-    Tray getTray(String mealId);
+    Tray getMealTray(String mealId);
+
+    @Query("SELECT * FROM tray WHERE drink_id = :drinkId")
+    Tray getDrinkTray(String drinkId);
 
     @Query("UPDATE tray SET meal_quantity = meal_quantity + :mealQty WHERE id = :trayId")
-    void updateTray(int trayId, int mealQty);
+    void updateMealTray(int trayId, int mealQty);
+
+    @Query("UPDATE tray SET drink_quantity = drink_quantity + :drinkQty WHERE id = :trayId")
+    void updateDrinkTray(int trayId, int drinkQty);
 }

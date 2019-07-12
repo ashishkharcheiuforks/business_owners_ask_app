@@ -57,7 +57,7 @@ public class DrinkDetailActivity extends AppCompatActivity {
         final TextView labelQuantity = findViewById(R.id.label_quantity);
         Button buttonIncrease = findViewById(R.id.button_increase);
         Button buttonDecrease = findViewById(R.id.button_decrease);
-        Button buttonTray = findViewById(R.id.button_add_tray);
+        Button buttonDrinkTray = findViewById(R.id.button_add_drink_tray);
         buttonIncrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,7 +79,7 @@ public class DrinkDetailActivity extends AppCompatActivity {
             }
         });
         db = AppDatabase.getAppDatabase(this);
-        buttonTray.setOnClickListener(new View.OnClickListener() {
+        buttonDrinkTray.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (BUTTON_SKIPPED) {
@@ -157,7 +157,7 @@ public class DrinkDetailActivity extends AppCompatActivity {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
-                db.trayDao().updateTray(trayId, drinkQty);
+                db.trayDao().updateDrinkTray(trayId, drinkQty);
                 return null;
             }
 
@@ -176,7 +176,7 @@ public class DrinkDetailActivity extends AppCompatActivity {
             protected String doInBackground(Void... voids) {
                 List<Tray> allTray = db.trayDao().getAll();
                 if (allTray.isEmpty() || allTray.get(0).getRestaurantId().equals(restaurantId)) {
-                    Tray tray = db.trayDao().getTray(drinkId);
+                    Tray tray = db.trayDao().getDrinkTray(drinkId);
                     if (tray == null) {
                         return "NOT_EXIST";
                     } else {

@@ -151,7 +151,7 @@ public class MealDetailActivity extends AppCompatActivity {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
-                db.trayDao().updateTray(trayId, mealQty);
+                db.trayDao().updateMealTray(trayId, mealQty);
                 return null;
             }
 
@@ -170,7 +170,7 @@ public class MealDetailActivity extends AppCompatActivity {
             protected String doInBackground(Void... voids) {
                 List<Tray> allTray = db.trayDao().getAll();
                 if (allTray.isEmpty() || allTray.get(0).getRestaurantId().equals(restaurantId)) {
-                    Tray tray = db.trayDao().getTray(mealId);
+                    Tray tray = db.trayDao().getMealTray(mealId);
                     if (tray == null) {
                         return "NOT_EXIST";
                     } else {
