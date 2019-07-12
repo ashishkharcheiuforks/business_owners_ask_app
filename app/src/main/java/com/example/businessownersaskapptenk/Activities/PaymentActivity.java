@@ -38,7 +38,7 @@ public class PaymentActivity extends AppCompatActivity implements PaytmPaymentTr
     private Button buttonPlaceOrder;
     private SharedPreferences sharedPref;
     String custid = "", orderId = "";
-    private static final String TAG = "loghere";
+    private static final String TAG = "lgx_PaymentActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,11 +70,13 @@ public class PaymentActivity extends AppCompatActivity implements PaytmPaymentTr
                 //call this function on click event for BUY or CHECKOUT button
                 generateCheckSum();
 
+
             }
         });
     }
 
     private void generateCheckSum() {
+        Log.d(TAG, "generateCheckSum: inside");
 
         String accessToken = sharedPref.getString("token", "");
         ApiService apiService = ApiClientFabCoding.getService();
