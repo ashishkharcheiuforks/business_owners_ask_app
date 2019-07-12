@@ -266,13 +266,7 @@ public class TrayFragment extends Fragment implements OnMapReadyCallback {
                         Log.d(TAG, "onClick: HashMap");
                         map.put("meal_id", Integer.parseInt(tray.getMealId()));
                         map.put("drink_id", Integer.parseInt(tray.getDrinkId()));
-                        if (tray.getMealQuantity() != 0) {
-                            map.put("quantity", tray.getMealQuantity());
-                            Log.d(TAG, "onClick: getMealQ --> " + tray.getMealQuantity());
-                        } else {
-                            map.put("quantity", tray.getDrinkQuantity());
-                            Log.d(TAG, "onClick: getDrinkQ --> " + tray.getDrinkQuantity());
-                        }
+                        map.put("quantity", tray.getMealQuantity() + tray.getDrinkQuantity());
                         orderDetails.add(map);
                     }
                     intent.putExtra("orderDetails", new Gson().toJson(orderDetails));
