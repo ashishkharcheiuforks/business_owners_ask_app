@@ -26,6 +26,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.businessownersaskapptenk.Activities.PaymentActivity;
 import com.example.businessownersaskapptenk.Adapters.TrayAdapter;
@@ -116,6 +117,7 @@ public class TrayFragment extends Fragment implements OnMapReadyCallback {
                 if (!trays.isEmpty()) {
                     trayList.clear();
                     trayList.addAll(trays);
+                    Log.d(TAG, "onPostExecute: traylist " + trayList);
                     trayAdapter.notifyDataSetChanged();
                     float total = 0;
                     for (Tray tray : trays) {
@@ -261,13 +263,23 @@ public class TrayFragment extends Fragment implements OnMapReadyCallback {
                     intent.putExtra("address", address.getText().toString());
                     ArrayList<HashMap<String, Integer>> orderDetails = new ArrayList<HashMap<String, Integer>>();
                     for (Tray tray : trayList) {//trayList  changed to tList for checking
+                        Log.d(TAG, "onClick: " + trayList);
                         Log.d(TAG, "onClick: Inside For Loop Tray");
                         HashMap<String, Integer> map = new HashMap<>();
                         Log.d(TAG, "onClick: HashMap");
-                        map.put("meal_id", Integer.parseInt(tray.getMealId()));
-                        map.put("drink_id", Integer.parseInt(tray.getDrinkId()));
-                        map.put("quantity", tray.getMealQuantity() + tray.getDrinkQuantity());
-                        orderDetails.add(map);
+                        if (tray.getMealId() != null) {
+                            Log.d(TAG, "onClick: here inside tray.getMealId() != null");
+                            map.put("meal_id", Integer.parseInt(tray.getMealId()));
+                            map.put("quantity", tray.getMealQuantity());
+                            orderDetails.add(map);
+                        } else if (tray.getDrinkId() != null) {
+                            Log.d(TAG, "onClick: In the else part that is drinkId");
+                            map.put("drink_id", Integer.parseInt(tray.getDrinkId()));
+                            map.put("quantity", tray.getDrinkQuantity());
+                            orderDetails.add(map);
+                        } else {
+                            Toast.makeText(getActivity(), "Both seem meal and drink null", Toast.LENGTH_SHORT).show();
+                        }
                     }
                     intent.putExtra("orderDetails", new Gson().toJson(orderDetails));
                     startActivity(intent);

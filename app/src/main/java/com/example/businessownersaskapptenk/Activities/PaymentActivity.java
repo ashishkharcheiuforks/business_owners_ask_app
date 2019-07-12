@@ -75,7 +75,7 @@ public class PaymentActivity extends AppCompatActivity implements PaytmPaymentTr
     }
 
     private void generateCheckSum() {
-
+        Log.d(TAG, "generateCheckSum: inside genChecksum");
         String accessToken = sharedPref.getString("token", "");
         ApiService apiService = ApiClientFabCoding.getService();
 
@@ -84,6 +84,7 @@ public class PaymentActivity extends AppCompatActivity implements PaytmPaymentTr
         call.enqueue(new Callback<ChecksumPaytm>() {
             @Override
             public void onResponse(Call<ChecksumPaytm> call, Response<ChecksumPaytm> response) {
+                Log.d(TAG, "onResponse: response generateChecksum " + response.body());
 
                 if (response.body().getChecksumHash() != null) {
                     Log.d(TAG, "onResponse: Payment Activity: " + response.body());
