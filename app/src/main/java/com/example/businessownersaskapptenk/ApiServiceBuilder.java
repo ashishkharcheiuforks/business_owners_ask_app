@@ -18,7 +18,7 @@ public class ApiServiceBuilder {
         if (retrofit == null){
 
         retrofit = new Retrofit.Builder()
-                .baseUrl("https://eightmaster.herokuapp.com/")
+                .baseUrl("https://terracehouse.herokuapp.com/")
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

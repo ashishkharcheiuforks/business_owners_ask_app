@@ -3,16 +3,16 @@
     <string name="facebook_app_id">341678839888568</string>
     <string name="fb_login_protocol_scheme">fb341678839888568</string>
 
-    <string name="API_URL">https://eightmaster.herokuapp.com/api</string>
-    <string name="CLIENT_ID">Brjt24i7iWy7fiEAWC6xSb8XskeH2vMAkJrgQvPB</string>
-    <string name="CLIENT_SECRET">XBiUczvgj1Zs1WI52Oa4UzxDZlt3XR87m2oC8Kig3tgPWgg1p4VyV1hyDaFMcUIyIrbXi3yNEs2bOr9QgqU9Ty1X3Gg9LHy3nDJoxEfvp5E6fudF0JIn2WwJclQCoFwj</string>
+    <string name="API_URL">https://terracehouse.herokuapp.com/api</string>
+    <string name="CLIENT_ID">RNnSa0p3v0CCw8IYVIPWd3FShB4lXUmPiVCIjiVX</string>
+    <string name="CLIENT_SECRET">Ub9Rt5FJszoasjqrhoiOnfeNdq6cihKQ8qp5saa9EqKH3azq5uACQCLHKwmDK63aysGadaFuLCjdRZYQsYGBFWF8zk1yLqUgs5iH0xvBq1Y9inxfgKQ0DPR5jQukoOE2</string>
     <string name="title_activity_customer_main">CustomerMainActivity</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="skip_login_required_title">Do you want to order?</string>
     <string name="skip_login_required_message">You need to login to order from the App.</string>
-ad
+    ad
 
     <string name="error">Note!</string>
     <string name="msg_unknown">Message Unknown</string>

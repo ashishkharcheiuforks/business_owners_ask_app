@@ -12,12 +12,23 @@ public class OrderDetail {
     @SerializedName("meal")
     @Expose
     private Meal meal;
+    @SerializedName("drink")
+    @Expose
+    private Drink drink;
     @SerializedName("quantity")
     @Expose
     private Integer quantity;
     @SerializedName("sub_total")
     @Expose
     private Integer subTotal;
+
+    public Drink getDrink() {
+        return drink;
+    }
+
+    public void setDrink(Drink drink) {
+        this.drink = drink;
+    }
 
     public Integer getId() {
         return id;
@@ -51,12 +62,12 @@ public class OrderDetail {
         this.subTotal = subTotal;
     }
 
-
     @Override
     public String toString() {
         return "OrderDetail{" +
                 "id=" + id +
                 ", meal=" + meal +
+                ", drink=" + drink +
                 ", quantity=" + quantity +
                 ", subTotal=" + subTotal +
                 '}';

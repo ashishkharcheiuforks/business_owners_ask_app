@@ -13,10 +13,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.businessownersaskapptenk.Adapters.MealAdapter;
+import com.example.businessownersaskapptenk.Adapters.DrinkAdapter;
 import com.example.businessownersaskapptenk.ApiService;
 import com.example.businessownersaskapptenk.ApiServiceBuilder;
-import com.example.businessownersaskapptenk.JsonModelObject.Meal;
+import com.example.businessownersaskapptenk.JsonModelObject.Drink;
 import com.example.businessownersaskapptenk.R;
 
 import java.util.ArrayList;
@@ -25,65 +25,65 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MealListActivity extends AppCompatActivity {
-    private FloatingActionButton fabToDrinksActivity;
-    private ArrayList<Meal> mealArrayList;
+public class DrinkListActivity extends AppCompatActivity {
+    private FloatingActionButton fabToMealsActivity;
+    private ArrayList<Drink> drinkArrayList;
     private RecyclerView recyclerView;
-    private MealAdapter mealAdapter;
-    private Meal[] listArr = new Meal[]{};
+    private DrinkAdapter drinkAdapter;
+    private Drink[] listArr = new Drink[]{};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_meal_list);
-        fabToDrinksActivity = findViewById(R.id.fab_to_drinks_activity);
+        setContentView(R.layout.activity_drink_list);
+        fabToMealsActivity = findViewById(R.id.fab_to_meals_activity);
         Intent intent = getIntent();
         String restaurantId = intent.getStringExtra("restaurantId");
         String restaurantName = intent.getStringExtra("restaurantName");
         getSupportActionBar().setTitle(restaurantName);
-        mealArrayList = new ArrayList<>();
-        mealAdapter = new MealAdapter(mealArrayList, this, restaurantId);
-        recyclerView = findViewById(R.id.meal_list);
+        drinkArrayList = new ArrayList<>();
+        drinkAdapter = new DrinkAdapter(drinkArrayList, this, restaurantId);
+        recyclerView = findViewById(R.id.drink_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(mealAdapter);
-        getMeals(restaurantId);
+        recyclerView.setAdapter(drinkAdapter);
+        getDrinks(restaurantId);
         addSearchFunction();
-        fabToDrinksActivity.setOnClickListener(new View.OnClickListener() {
+        fabToMealsActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MealListActivity.this, "Go to Drinks Activity", Toast.LENGTH_SHORT).show();
-                Intent goToDrinkIntent = new Intent(MealListActivity.this, DrinkListActivity.class);
-                goToDrinkIntent.putExtra("restaurantId", restaurantId);
-                goToDrinkIntent.putExtra("restaurantName", restaurantName);
-                startActivity(goToDrinkIntent);
+                Toast.makeText(DrinkListActivity.this, "Go to Meals Activity", Toast.LENGTH_SHORT).show();
+                Intent goToMealIntent = new Intent(DrinkListActivity.this, MealListActivity.class);
+                goToMealIntent.putExtra("restaurantId", restaurantId);
+                goToMealIntent.putExtra("restaurantName", restaurantName);
+                startActivity(goToMealIntent);
                 finish();
             }
         });
     }
 
-    private void getMeals(String restaurantId) {
+    private void getDrinks(String restaurantId) {
         //This is an instance of our ApiService, and we are gonna pass our API service class,
         ApiService apiService = ApiServiceBuilder.getService();
         // Next we are Calling our method on this API
-        Call<Meal> mealCall = apiService.getMeals(Integer.parseInt(restaurantId));
+        Call<Drink> drinkCall = apiService.getDrinks(Integer.parseInt(restaurantId));
         // Now we choose if we are going to call it synchronously or asynchronously
         // Since we are in an activity and an UI thread we need to do an Async with the method enqueue
-        mealCall.enqueue(new Callback<Meal>() {
+        drinkCall.enqueue(new Callback<Drink>() {
             @Override
-            public void onResponse(Call<Meal> call, Response<Meal> response) {
+            public void onResponse(Call<Drink> call, Response<Drink> response) {
                 //What happens when we get a reponse from our server
-                for (int i = 0; i < response.body().getMealList().size(); i++) {
-                    mealArrayList.add(response.body().getMealList().get(i));
+                for (int i = 0; i < response.body().getDrinkList().size(); i++) {
+                    drinkArrayList.add(response.body().getDrinkList().get(i));
                 }
-                listArr = new Meal[mealArrayList.size()];
-                listArr = mealArrayList.toArray(listArr);
-                mealAdapter.notifyDataSetChanged();
+                listArr = new Drink[drinkArrayList.size()];
+                listArr = drinkArrayList.toArray(listArr);
+                drinkAdapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onFailure(Call<Meal> call, Throwable t) {
+            public void onFailure(Call<Drink> call, Throwable t) {
                 // This throws all the http error codes, network failures, null exceptions
                 Toast.makeText(getApplicationContext(), t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
             }
@@ -100,13 +100,13 @@ public class MealListActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
                 Log.d("SEARCH", charSequence.toString());
-                mealArrayList.clear();
-                for (Meal m : listArr) {
-                    if (m.getName().toLowerCase().contains(charSequence.toString().toLowerCase())) {
-                        mealArrayList.add(m);
+                drinkArrayList.clear();
+                for (Drink d : listArr) {
+                    if (d.getName().toLowerCase().contains(charSequence.toString().toLowerCase())) {
+                        drinkArrayList.add(d);
                     }
                 }
-                mealAdapter.notifyDataSetChanged();
+                drinkAdapter.notifyDataSetChanged();
             }
 
             @Override

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.businessownersaskapptenk.Activities.DrinkListActivity;
 import com.example.businessownersaskapptenk.Activities.MealListActivity;
 import com.example.businessownersaskapptenk.JsonModelObject.Registration;
 import com.example.businessownersaskapptenk.R;
@@ -46,7 +47,7 @@ public class ResAdapter extends RecyclerView.Adapter<ResAdapter.MyViewHolder> {
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(activity, MealListActivity.class);
+                Intent intent = new Intent(activity, DrinkListActivity.class);
                 intent.putExtra("restaurantId", resIdText1);
                 intent.putExtra("restaurantName", resNameText1);
                 activity.startActivity(intent);

@@ -1,5 +1,6 @@
 package com.example.businessownersaskapptenk;
 
+import com.example.businessownersaskapptenk.JsonModelObject.Drink;
 import com.example.businessownersaskapptenk.JsonModelObject.Example;
 import com.example.businessownersaskapptenk.JsonModelObject.Meal;
 import com.example.businessownersaskapptenk.JsonModelObject.Registration;
@@ -101,6 +102,16 @@ public interface ApiService {
     })
     @GET("api/customer/meals/{id}/")
     Call<Meal> getMeals(@Path("id") int id);
+
+
+    @Headers({
+            "Accept: application/json",
+            "Content-Type: application/json"
+    })
+    @GET("api/customer/drinks/{id}/")
+    Call<Drink> getDrinks(@Path("id") int id);
+
+
 
     @Headers({
             "Accept: application/json",
